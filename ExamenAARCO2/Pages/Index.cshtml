@@ -1,0 +1,107 @@
+﻿@page
+@using Newtonsoft.Json
+@model IndexModel
+@{
+
+    var Cotizamatico = new Cotizamatico{NombreCatalogo2="Marca",Filtro2="1",IdAplication2=2};
+
+    var respuesta = await Cotizamatico.consulta();
+}
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+
+<form action="" method="post" onload="llenarCombo();">    
+
+<label>Marca:</label><select id="marca" required>
+<option value="none" selected disabled hidden>Selecciona una marca</option>
+</select>
+
+<br/><br/>
+
+<label>Submarca:</label><select id="submarca" required>
+<option value="none" selected disabled hidden>Selecciona una submarca</option>
+</select>
+
+<br/><br/>
+
+<label>Módelo:</label><select id="modelo" onchange="" required>
+<option value="none" selected disabled hidden>Selecciona un modelo</option>
+</select>
+
+<br/><br/>
+
+<label>Descripción:</label><select id="descripcion" required>
+<option value="none" selected disabled hidden>Selecciona una descripcion</option>
+</select>   
+
+<br/><br/>
+
+<label>Código Postal:</label><input type="number" placeholder="Código Postal" required>
+
+<br/><br/>
+
+<label>Estado:</label><input type="text" placeholder="Estado" required>
+
+<br/><br/>
+
+<label>Municipio:</label><input type="text" placeholder="Municipio" required>
+
+<br/><br/>
+
+<label>Colonia:</label><input type="text" placeholder="Colonia" required>
+
+<br/><br/>
+
+<input type="submit" value="cotizar">
+
+</form>
+
+
+</div>
+
+<script>
+
+    
+
+    const respuesta = @Html.Raw(respuesta);
+
+    let arr1= JSON.parse(respuesta.CatalogoJsonString);
+
+    window.onload=()=>{
+        
+    let select = document.getElementById("marca");
+
+    select.addEventListener("change",()=>{alert ("Funciona");})
+
+    let select2 = document.getElementById("submarca");
+
+    let select3 = document.getElementById("modelo");
+
+    let select4 = document.getElementById("descripcion");
+    
+    arr1.map(elem=>{
+    
+        let option = document.createElement("option");
+
+        option.text = elem.sMarca;
+        select.add(option);
+
+    })
+
+    arr1.map(elem=>{
+    
+        let option = document.createElement("option");
+
+        option.text = elem.sMarca;
+        select.add(option);
+
+    })
+
+
+    }
+
+</script>
+
